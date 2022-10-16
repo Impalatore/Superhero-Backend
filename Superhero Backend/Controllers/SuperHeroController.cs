@@ -62,5 +62,15 @@ namespace Superhero_Backend.Controllers
 
             return Ok(await _context.SuperHeroes.ToListAsync());
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<SuperHero>>> SearchSuperHero(int id)
+        {
+            var dbHero = await _context.SuperHeroes.FindAsync(id);
+            if (dbHero == null)
+                return BadRequest("Hero not found.");
+
+            return Ok(await _context.SuperHeroes.FindAsync(id));
+        }
     }
 }
